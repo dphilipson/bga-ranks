@@ -3,12 +3,16 @@ import { createObjectCsvWriter } from "csv-writer";
 import { compareTwoStrings } from "string-similarity";
 import { chainFrom } from "transducist";
 import { parseStringPromise } from "xml2js";
-import bgaGameList from "./bgaGameList";
+import { bgaGameList, overrides } from "./bgaGameList";
 
 const BGG_BASE_URL = "https://www.boardgamegeek.com/xmlapi2";
+const CONCURRENCY = 4;
 
 async function main(): Promise<void> {
-  const data = await Promise.all(bgaGameList.map(getGameData));
+  const data = await runWithMaxConcurrency(
+    bgaGameList.map((name) => () => getGameData(name)),
+    CONCURRENCY,
+  );
   const nonNullData = chainFrom(data).removeAbsent().toArray();
   await saveGameDataToCsv("out.csv", nonNullData);
 }
@@ -43,15 +47,15 @@ async function getGameData(name: string): Promise<GameData | undefined> {
   }
   const gameInfo = await parseStringPromise(gameResponse.data);
   const item = gameInfo.items.item[0];
-  const bggName = item.name[0]["$"].value;
+  const bggName = item.name[0].$.value;
   const ratings = item.statistics[0].ratings[0];
-  const rankObject = ratings.ranks[0].rank[0]["$"];
+  const rankObject = ratings.ranks[0].rank[0].$;
   const rank = +rankObject.value;
   const rating = +rankObject.bayesaverage;
-  const weight = +ratings.averageweight[0]["$"].value;
-  const minPlayers = +item.minplayers[0]["$"].value;
-  const maxPlayers = +item.maxplayers[0]["$"].value;
-  const playingTime = +item.playingtime[0]["$"].value;
+  const weight = +ratings.averageweight[0].$.value;
+  const minPlayers = +item.minplayers[0].$.value;
+  const maxPlayers = +item.maxplayers[0].$.value;
+  const playingTime = +item.playingtime[0].$.value;
   return {
     bgaName: name,
     bggName,
@@ -71,11 +75,13 @@ async function getGameData(name: string): Promise<GameData | undefined> {
  * a string similarity algorithm.
  */
 async function getGameId(name: string): Promise<number | undefined> {
+  // Colons break BGG's search.
+  const query = (overrides[name] ?? name).replace(/:/g, "");
   let searchResponse;
   try {
     searchResponse = await withRetries(() =>
       axios.get<string>(BGG_BASE_URL + "/search", {
-        params: { query: name, type: "boardgame" },
+        params: { query, type: "boardgame" },
       }),
     );
   } catch (error) {
@@ -88,13 +94,12 @@ async function getGameId(name: string): Promise<number | undefined> {
     return undefined;
   }
   const result = chainFrom(searchResults.items.item as any[])
-    .filter((item) => item.name[0]["$"].type === "primary")
     .map((item) => ({
-      id: item["$"].id,
-      name: item.name[0]["$"].value,
+      id: item.$.id,
+      name: item.name[0].$.value,
       similarity: compareTwoStrings(
         name.toLowerCase(),
-        item.name[0]["$"].value.toLowerCase(),
+        item.name[0].$.value.toLowerCase(),
       ),
     }))
     .max((item1, item2) => item1.similarity - item2.similarity);
@@ -129,8 +134,30 @@ async function saveGameDataToCsv(
   await csvWriter.writeRecords(data);
 }
 
+async function runWithMaxConcurrency<T>(
+  fs: (() => Promise<T>)[],
+  maxConcurrency: number,
+): Promise<T[]> {
+  const results: T[] = new Array(fs.length);
+  const workers: Promise<void>[] = [];
+  let nextIndex = 0;
+  for (let i = 0; i < maxConcurrency; i++) {
+    workers.push(
+      (async () => {
+        while (nextIndex < fs.length) {
+          const index = nextIndex++;
+          results.push(await fs[index]());
+        }
+      })(),
+    );
+  }
+  await Promise.all(workers);
+  return results;
+}
+
 const INITIAL_WAIT = 1000;
 const MAX_WAIT = 30000;
+const MAX_RETRIES = 10;
 
 /**
  * Retries the provided fetch call with exponential backoff in order to dodge
@@ -139,16 +166,17 @@ const MAX_WAIT = 30000;
 async function withRetries<T>(
   fetch: () => Promise<AxiosResponse<T>>,
 ): Promise<AxiosResponse<T>> {
+  let retryCount = 0;
   let nextWait = INITIAL_WAIT;
   while (true) {
     try {
       return await fetch();
-    } catch (error) {
-      // 429 response is rate-limited.
-      if (error?.response?.status !== 429) {
+    } catch (error: any) {
+      if (retryCount === MAX_RETRIES) {
         throw error;
       }
       await delay(nextWait);
+      retryCount++;
       nextWait = Math.min(MAX_WAIT, 2 * nextWait);
     }
   }

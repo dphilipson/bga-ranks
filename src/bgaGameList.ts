@@ -1,433 +1,739 @@
+export const overrides: Record<string, string> = {
+  "Through the Ages": "Through the Ages: A Story of Civilization",
+  Viticulture: "Viticulture Essential Edition",
+};
+
 // Obtained by selecting the game list on Board Game Arena and copying it.
-const bgaGameList: string[] = `Carcassonne
+export const bgaGameList: string[] = `Carcassonne
 
-7 Wonders
+Splendor
 
-Potion Explosion
+7 Wonders Duel
 
-Kingdomino
+Patchwork
+
+Agricola
 
 6 nimmt!
 
-Terra Mystica
-
-Can't Stop
-
-Stone Age
+7 Wonders
 
 Hanabi
 
-Downforce
+Lost Ruins of Arnak
+
+Can't Stop
+
+Viticulture
+
+King of Tokyo
+
+Terra Mystica
+
+LLAMA
+
+Potion Explosion
+
+The Castles of Burgundy
+
+Kingdomino
 
 Race for the Galaxy
 
+Dice Hospital
+
+Stone Age
+
+Pandemic
+
+CuBirds
+
+Welcome To
+
 Seasons
 
-Santorini
+Kingdom Builder
+
+Res Arcana
+
+Railroad Ink
+
+Lucky Numbers
 
 Puerto Rico
-
-Dice Forge
-
-Takenoko
-
-Through the Ages: A new Story of Civilization
-
-Roll for the Galaxy
 
 Yahtzee
 
 Lost Cities
 
-Yokohama
-
-Kingdom Builder
-
-Sushi Go!
-
-The Voyages of Marco Polo
-
-Clans of Caledonia
+French Tarot
 
 Solo
 
-Saint Petersburg
+BANG!
 
-Love Letter
+Abandon All Artichokes
 
-French Tarot
+Beyond the Sun
 
-Rallyman: GT
+Alhambra
 
-Hearts
+The Crew
 
-Jaipur
-
-Backgammon
+Dice Forge
 
 Innovation
 
-The Werewolves of Miller's Hollow
+Sushi Go!
+
+Through the Ages: A new Story of Civilization
+
+Roll for the Galaxy
+
+Takenoko
+
+Backgammon
+
+Hearts
+
+Wizard
+
+Chakra
+
+Jaipur
+
+Love Letter
+
+Nidavellir
+
+Papayoo
+
+Belote
 
 Saboteur
 
-Teotihuacan: City of Gods
+Clans of Caledonia
+
+Downforce
+
+Insert
+
+Tock
+
+Carcassonne: Hunters & Gatherers
+
+Saint Petersburg
+
+Bandido
+
+Hugo
 
 Oh Hell!
 
 Tokaido
 
-Tzolk'in
+Russian Railroads
 
-Tock
+The Voyages of Marco Polo
 
-Papayoo
+Tichu
+
+Piraten kapern
+
+New Frontiers
+
+Hardback
+
+Marco Polo II: In the Service of the Khan
 
 For Sale
 
-Belote
+Cribbage
 
-City of the Big Shoulders
+Rallyman: GT
 
-La Granja
+Automobiles
 
-Targi
+Codex Naturalis
 
-Chakra
+Trek 12
 
-Incan Gold
+Martian Dice
 
-Russian Railroads
+Teotihuacan: City of Gods
+
+Draftosaurus
+
+Tzolk'in
+
+Go Nuts for Donuts
 
 Bubblee Pop
 
-Colt Express
+Incan Gold
 
-Coup
+Spades
 
-Quantum
-
-The Builders: Middle Ages
-
-Trekking the World
-
-Caylus
-
-The King's Guild
-
-Flaming Pyramids
-
-Coloretto
-
-Keyflower
-
-Small Islands
-
-Eminent Domain
-
-Nippon
-
-Yspahan
-
-Eruption
-
-Off the Rails
-
-Sapiens
-
-Lewis & Clark
-
-Chess
-
-Koi-Koi
-
-Red7
-
-Butterfly
-
-Hive
-
-Elfenland
-
-Troyes
-
-Buttons
-
-Connect Four
-
-Room 25
-
-Battle Sheep
-
-Color Pop
-
-Turn the tide
-
-President
-
-Not Alone
-
-Libertalia
+Abyss
 
 Coinche
 
-P.I.
+Conspiracy
+
+Letter Tycoon
+
+Happy City
+
+Hand and Foot
+
+Targi
+
+Chess
+
+Fluxx
+
+Yokohama
+
+Luxor
+
+Santorini
+
+Battle Sheep
+
+Via Magica
+
+The Werewolves of Miller's Hollow
+
+Homesteaders
+
+La Granja
+
+Marrakech
+
+No Thanks!
+
+Coup
+
+Concept
+
+Coloretto
+
+Carnegie
+
+13 Clues
+
+Sobek: 2 Players
+
+Simplicity
+
+99 (addition card game)
+
+Tranquility
+
+Koi-Koi
+
+Thurn and Taxis
+
+Eruption
+
+Haiclue
+
+The King's Guild
+
+Skull
+
+Oriflamme
+
+The Builders: Middle Ages
+
+Forbidden Island
+
+Troyes Dice
+
+Iwari
 
 Tash-Kalar
 
-Circle of Life
+Just Desserts
 
-Perudo
+Red7
+
+Steam Works
+
+Flaming Pyramids
+
+Super Fantasy Brawl
+
+Rage
+
+Colt Express
+
+Eminent Domain
+
+President
+
+Troyes
+
+That's Life!
+
+Hive
+
+Dungeon Roll
+
+Monster Factory
+
+City of the Big Shoulders
+
+Connect Four
+
+Schrödinger's Cats
+
+Welcome To New Las Vegas
+
+Caylus
+
+Illustori
+
+Chinese checkers
 
 Dungeon Twister
 
-Dragonheart
+P.I.
 
-The Builders: Antiquity
-
-Bobail
-
-Legendary Inventors
-
-Taluva
-
-K2
-
-Lords of Xidit
+Mr. Jack
 
 Signorie
 
-Machiavelli
+Trekking the World
 
-Hawaii
+Pingimus
 
-Dragon Castle
+Diced Tomatoes
 
-Kami
-
-The Palaces of Carrara
-
-Crazy Farmers
-
-Expedition: Northwest Passage
+Elfenland
 
 Reversi
 
+Lords of Xidit
+
+Onitama
+
 Celestia
 
-ToeShamBo
+Paris Connection
 
-Krosmaster Arena
+Dungeon Petz
 
-The Boss
+Nippon
 
-Tea Time
+Gold West
 
-Whist 22
+Lewis & Clark
 
-Checkers
+Color Pop
 
-Go
+Butterfly
 
-Stir Fry Eighteen
+Keyflower
 
-Assyria
-
-Tobago
-
-Kahuna
-
-Ice Cold Ice Hockey
-
-Finity
-
-Tournay
-
-Kalah
+Dragonwood
 
 Quoridor
 
-Quarto
+Not Alone
 
-Gomoku
+Whist 22
 
-Sobek
+Cacao
 
-Gaïa
+Caravan
 
-Skat
+Turn the tide
 
-Hex
+Buttons
 
-99 (trick-taking card game)
+K2
 
-Xanadu
+Medina
 
-Battleships Pencil & Paper
+Quantum
 
-Twin Tin Bots
+Liverpool (Cozy Oaks) Rummy
 
-Big Time Soccer
+Room 25
 
-Through the Ages
+Cardiceo
 
-Apocalypse at the Zoo of Carson City
-
-Lines of Action
-
-Cinco
-
-Time Masters
-
-Hypnosia
-
-Battle of LITS
-
-Secret Moon
-
-The Battle for Hill 218
-
-Haggis
-
-Niagara
-
-Thermopyles
-
-Origin
+Quetzal
 
 Senet
 
-Spyrium
+Solar Storm
+
+Libertalia
+
+Vulture Culture
+
+Dragonheart
+
+Fleet
+
+Hawaii
+
+Squadro
+
+Perudo
+
+Off the Rails
+
+Battleships Pencil & Paper
+
+Harbour
+
+Abalone
+
+The Builders: Antiquity
+
+Dinosaur Tea Party
+
+Sapiens
+
+Krosmaster Arena
+
+Gomoku
+
+Machiavelli
+
+Boomerang: Australia
+
+Kami
+
+Mapmaker: The Gerrymandering Game
+
+Uptown
+
+Small Islands
+
+Sobek
+
+Checkers
+
+Dingo's Dreams
+
+Trick of the Rails
+
+Skat
+
+Go
+
+Quarto
+
+Balloon Pop!
+
+99 (trick-taking card game)
+
+Detective Poker
+
+Solo Whist
+
+Battle of LITS
 
 Penny Press
 
-Connect6
+Jekyll vs. Hyde
 
-Nile
+Klaverjassen
 
-Veggie Garden
+Hoarders
 
-The Jelly Monster Lab
+Hex
 
-8 Masters' Revenge
+Sheep Boom Bah
 
-Barbu
-
-Koryŏ
-
-Marram
-
-Siam
-
-Soluna
-
-Gosu
-
-Briscola
-
-Saint Poker
-
-In The Year of the Dragon
-
-Neutreeko
-
-Noir: Killer versus Inspector
-
-Uncle Chestnut's Table Gype
-
-Metromania
-
-Palace
+Tobago
 
 Madeira
 
-NXS
+Eminent Domain: Microcosm
 
-Diam's
+King of the Pitch
 
-Remember When
+Uncle Chestnut's Table Gype
 
-Pylos
+Crazy Farmers
 
-Logger
+Spyrium
 
-Dragon Keeper: The Dungeon
+Stir Fry Eighteen
 
-Bombay
+Secret Moon
 
-Con Sonar!
+Krosmaster Blast
+
+Time Masters
+
+Mijnlieff
+
+Hungarian Tarokk
+
+Through the Ages
+
+Kahuna
+
+Verona Twist
+
+Dice Summoners
+
+Palace
+
+Zener
+
+Big Time Soccer
+
+Siam
+
+Taluva
+
+The Boss
+
+Hypnosia
+
+In The Year of the Dragon
+
+Noir: Killer versus Inspector
+
+Senshi
+
+Kalah
+
+Yokai
+
+Nile
+
+Gosu
 
 Nine Men's Morris
 
-Takara Island
+Legendary Inventors
 
-Veletas
+Dodo
 
-Gygès
+Polis: Fight for Hegemony
 
-Guildes
+ONE
 
-Mammalath
+Connect6
 
-Tiki
+Once Upon A Forest
 
-Blooms
+Tea Time
 
-United Square
+Gaïa
 
-Kabaleo
+Rolled West
 
-Ponte del Diavolo
+Haggis
 
-Outlaws: Last Man Standing
+Medo
+
+Herrlof
 
 Xiangqi
 
-Isaac
+Metromania
 
-China Gold
+Nanga Parbat
 
-Armadöra
+Barbu
 
-Alveole
+Phat
 
-Tablut
+Mattock
 
-Nautilus
+Bobail
 
-Four Color Cards
+Bids
 
-The Ruhr: A Story of Coal Trade
-
-Khronos
+Briscola
 
 Florenza: The Card Game
 
-Gear & Piston
+Rest In Peace
+
+Apocalypse at the Zoo of Carson City
+
+Linkage
+
+The Palaces of Carrara
+
+Diam's
+
+Blaze
+
+ToeShamBo
+
+China Gold
+
+Pylos
+
+Veletas
+
+Cinco
+
+Thermopyles
+
+Grand Bazaar
+
+Koryŏ
+
+Guildes
+
+Kabaleo
+
+Nautilus
+
+Niagara
+
+Mammalath
+
+The Battle for Hill 218
+
+Alveole
+
+Bug
+
+Jump Gate
+
+Lines of Action
+
+The Jelly Monster Lab
+
+Quinque
+
+Biyi
+
+Quantik
+
+Veggie Garden
+
+Blooms
+
+Sparts
+
+Exploration: Warzone
+
+Oh-Seven
+
+Neutreeko
+
+Yin Yang
 
 GORami
 
-Dragon Line
+Four Color Cards
 
-Djambi
+Tiki
 
-Amyitis
+Murus Gallicus
+
+Saint Poker
+
+Gear & Piston
+
+Gopher
+
+Unconditional Surrender! World War 2 in Europe
+
+Ponte del Diavolo
+
+Tablut
+
+Penalty Challenge
+
+United Square
+
+Soluna
 
 Hack Trick
+
+Takara Island
+
+Le Dernier Peuple
+
+Dragon Keeper: The Dungeon
+
+A Fistful of Gold
+
+Herooj
+
+Logger
+
+Armadöra
+
+Dragon Line
+
+For-Ex
+
+Expedition: Northwest Passage
+
+Pedro
+
+Canosa
+
+Finity
+
+Marram
+
+Bombay
+
+Remember When
+
+Outlaws: Last Man Standing
+
+Khronos
+
+The Ruhr: A Story of Coal Trade
+
+Circle of Life
+
+NXS
+
+Con Sonar!
+
+Tournay
+
+Lost Explorers
+
+Gygès
 
 KQJ
 
 Caribbean All Fours
 
-Polis: Fight for Hegemony
+Dragon Castle
+
+Assyria
+
+Grosstarock
+
+Ice Cold Ice Hockey
+
+Djambi
+
+Blue Skies
+
+Origin
+
+Amyitis
+
+Isaac
+
+8 Masters' Revenge
+
+Twin Tin Bots
 
 Dark Agent
 
-Evo: The “Game no Name”
+Lineae
 
-Jump Gate
-
-Le Dernier Peuple
-
-Hungarian Tarokk`.split("\n\n");
-export default bgaGameList;
+Evo: The “Game no Name”`.split("\n\n");
