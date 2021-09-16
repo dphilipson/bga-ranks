@@ -146,7 +146,7 @@ async function runWithMaxConcurrency<T>(
       (async () => {
         while (nextIndex < fs.length) {
           const index = nextIndex++;
-          results.push(await fs[index]());
+          results[index] = await fs[index]();
         }
       })(),
     );
